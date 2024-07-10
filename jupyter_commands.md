@@ -1,8 +1,7 @@
-**Warning** This is **SEVERELY** outdated, the current jupyter version is > 6.X, please refer to your current jupyter notebook installation!
 
 **Disclaimer** : I just copied those shortcuts from `Jupyter Menú` > `Help` > `Keyboard Shortcuts`, I didn't wrote them myself.
 
-Check your current shortcuts in your Help, shortcuts coule have been modified by extensions or your past self.
+Check your current shortcuts in your Help, shortcuts could have been modified by extensions or your past self.
 
 # Toc
 
