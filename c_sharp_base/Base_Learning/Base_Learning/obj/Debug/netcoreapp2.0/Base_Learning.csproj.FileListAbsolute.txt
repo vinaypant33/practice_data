@@ -1,0 +1,11 @@
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\obj\Debug\netcoreapp2.0\Base_Learning.csprojAssemblyReference.cache
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\obj\Debug\netcoreapp2.0\Base_Learning.csproj.CoreCompileInputs.cache
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\obj\Debug\netcoreapp2.0\Base_Learning.AssemblyInfoInputs.cache
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\obj\Debug\netcoreapp2.0\Base_Learning.AssemblyInfo.cs
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\bin\Debug\netcoreapp2.0\Base_Learning.deps.json
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\bin\Debug\netcoreapp2.0\Base_Learning.runtimeconfig.json
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\bin\Debug\netcoreapp2.0\Base_Learning.runtimeconfig.dev.json
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\bin\Debug\netcoreapp2.0\Base_Learning.dll
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\bin\Debug\netcoreapp2.0\Base_Learning.pdb
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\obj\Debug\netcoreapp2.0\Base_Learning.dll
+C:\Users\vinay\Desktop\coding_workspace\practice_data\C Sharp Base\Base_Learning\Base_Learning\obj\Debug\netcoreapp2.0\Base_Learning.pdb
