@@ -6,19 +6,20 @@ namespace Base_Learning
 
     class Learning_3
     {
+
+        static void hell(String hela)
+        {
+            Console.WriteLine("I am the another function From Local Function");
+            Console.ReadLine();
+
+        }
         static void Main(string[] args)
         {
-            // Loop in the main file and code : 
-
-            for (int i = 0; i < 100; i++)  
-
-            Console.WriteLine(i);
+            Console.WriteLine("I am another function");
             Console.ReadLine();
-            Console.WriteLine("Name");
-            Console.ReadLine();
+            hell("Another Name");
 
 
-           
         }
     }
 }
