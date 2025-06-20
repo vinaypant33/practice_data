@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Anime Watch Tracker — 2025</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#0f1115;--card:#171a21;--ink:#e8eaf0;--muted:#aab1bf;--accent:#5eead4;--accent2:#7c3aed;--border:#2a2f3a}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:linear-gradient(180deg,#0f1115 0%,#121520 100%);color:var(--ink);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",Arial}
+.wrapper{max-width:1200px;margin:24px auto;padding:0 16px}
+.header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin-bottom:14px}
+.title{font-weight:700;font-size:22px;letter-spacing:.2px}
+.controls{display:flex;gap:10px;flex-wrap:wrap}
+input[type="text"],select,button{background:#121520;color:var(--ink);border:1px solid var(--border);padding:10px 12px;border-radius:10px;outline:none}
+button{cursor:pointer}
+button.primary{background:var(--accent2);border-color:transparent}
+button.ghost{background:#121520}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#141824;border:1px solid var(--border);color:var(--muted);font-size:12px}
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+table{width:100%;border-collapse:separate;border-spacing:0}
+thead th{position:sticky;top:0;background:#151924;border-bottom:1px solid var(--border);padding:12px 10px;text-align:left;font-weight:700;font-size:13px}
+tbody td{padding:10px;border-bottom:1px dashed #1f2531;vertical-align:middle}
+tbody tr:nth-child(odd){background:#141824}
+tbody tr:hover{background:#192032}
+.name{font-weight:600}
+.note{color:var(--muted);font-size:12px}
+.season-cell{display:flex;align-items:center;gap:8px}
+.season-none{color:#6b7280;font-size:12px;opacity:.85}
+.chk{width:18px;height:18px;accent-color:var(--accent)}
+.footer{display:flex;justify-content:space-between;align-items:center;padding:12px 10px;background:#151924;border-top:1px solid var(--border)}
+.progress{font-size:13px;color:var(--muted)}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;background:#0f1420;border:1px solid #273048;border-radius:6px;padding:2px 6px;color:#93a1b2}
+@media (max-width:980px){
+  .opt-cols{display:none}
+  .title{font-size:18px}
+  thead th:nth-child(n+9),tbody td:nth-child(n+9){display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <div class="title">Anime Watch Tracker — 2025 <span class="badge" id="summaryBadge">Loading…</span></div>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search anime…">
+      <select id="genreFilter">
+        <option value="all">All types</option>
+        <option value="action">Action</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="isekai">Isekai</option>
+        <option value="sports">Sports</option>
+        <option value="romance">Romance</option>
+        <option value="slice">Slice-of-life</option>
+        <option value="psych">Psychological/Thriller</option>
+        <option value="mecha">Mecha/Sci-fi</option>
+        <option value="comedy">Comedy</option>
+      </select>
+      <button class="ghost" id="showWatched">Show watched only</button>
+      <button class="ghost" id="clearFilters">Clear filters</button>
+      <button class="primary" id="resetAll">Reset all checks</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table id="animeTable">
+      <thead>
+        <tr>
+          <th style="width:36px;">#</th>
+          <th>Anime</th>
+          <th>Season 1</th>
+          <th>Season 2</th>
+          <th>Season 3</th>
+          <th>Season 4</th>
+          <th class="opt-cols">Season 5</th>
+          <th class="opt-cols">Season 6</th>
+          <th class="opt-cols">Season 7</th>
+          <th class="opt-cols">Season 8</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+      <tfoot>
+        <tr><td colspan="11" class="footer">
+          <div class="progress" id="progressText">0 of 0 seasons watched</div>
+          <div class="progress">Tip: use <span class="kbd">Ctrl/Cmd</span> + <span class="kbd">F</span> to quickly find a title</div>
+        </td></tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<script>
+const data=[
+{n:"Attack on Titan",s:4,g:["action","fantasy"],note:"Dark fantasy"},
+{n:"Demon Slayer",s:4,g:["action","fantasy"],note:"High production"},
+{n:"Jujutsu Kaisen",s:2,g:["action","fantasy"],note:"Season 3 announced"},
+{n:"My Hero Academia",s:8,g:["action","comedy"],note:"School heroes"},
+{n:"One Piece",s:8,g:["action","fantasy","comedy"],note:"Ongoing"},
+{n:"Naruto",s:2,g:["action","fantasy"],note:"Includes Shippuden"},
+{n:"Bleach",s:4,g:["action","fantasy"],note:"TYBW return"},
+{n:"Spy × Family",s:2,g:["comedy","action","slice"],note:"Family + action"},
+{n:"That Time I Got Reincarnated as a Slime",s:3,g:["isekai","fantasy","action"],note:"Politics of Tempest"},
+{n:"Dr. Stone",s:4,g:["fantasy","action"],note:"Science adventure"},
+{n:"Frieren: Beyond Journey’s End",s:1,g:["fantasy"],note:"Emotional fantasy"},
+{n:"The Apothecary Diaries",s:2,g:["slice","romance"],note:"Historical mystery"},
+{n:"Re:Zero",s:2,g:["isekai","psych"],note:"Time loop"},
+{n:"Mushoku Tensei",s:2,g:["isekai","fantasy"],note:"Character driven"},
+{n:"Overlord",s:4,g:["isekai","fantasy"],note:"OP antihero"},
+{n:"Konosuba",s:2,g:["isekai","comedy"],note:"Parody"},
+{n:"No Game No Life",s:1,g:["fantasy","comedy"],note:"Strategy world"},
+{n:"Sword Art Online",s:4,g:["action","fantasy","mecha"],note:"VR arcs"},
+{n:"One Punch Man",s:2,g:["action","comedy"],note:"Parody hero"},
+{n:"Tokyo Revengers",s:3,g:["action","psych"],note:"Gangs + time"},
+{n:"Chainsaw Man",s:1,g:["action","comedy"],note:"Gory style"},
+{n:"Black Clover",s:2,g:["action","fantasy"],note:"Magic rivalry"},
+{n:"Haikyuu!!",s:4,g:["sports"],note:"Volleyball"},
+{n:"Blue Lock",s:2,g:["sports","psych"],note:"Football ego"},
+{n:"Kuroko no Basket",s:3,g:["sports"],note:"Basketball"},
+{n:"Hajime no Ippo",s:3,g:["sports"],note:"Boxing classic"},
+{n:"Megalo Box",s:2,g:["sports"],note:"Cyber boxing"},
+{n:"Kengan Ashura",s:3,g:["sports","action"],note:"MMA arena"},
+{n:"Baki",s:4,g:["sports","action"],note:"Extreme fights"},
+{n:"Cestvs: The Roman Fighter",s:1,g:["sports","action"],note:"Ancient boxing"},
+{n:"Vinland Saga",s:2,g:["action","psych"],note:"Viking epic"},
+{n:"Fullmetal Alchemist: Brotherhood",s:1,g:["action","fantasy"],note:"Masterpiece"},
+{n:"Death Note",s:1,g:["psych"],note:"Cat-and-mouse"},
+{n:"Code Geass",s:2,g:["mecha","psych"],note:"Strategy"},
+{n:"Steins;Gate",s:2,g:["psych","mecha"],note:"Time travel"},
+{n:"Neon Genesis Evangelion",s:1,g:["mecha","psych"],note:"Iconic"},
+{n:"Cowboy Bebop",s:1,g:["action","mecha"],note:"Space noir"},
+{n:"Gintama",s:8,g:["comedy","action"],note:"Comedy king"},
+{n:"Mob Psycho 100",s:3,g:["action","comedy"],note:"Heartfelt"},
+{n:"The Disastrous Life of Saiki K",s:3,g:["comedy","slice"],note:"Psychic chaos"},
+{n:"The Devil Is a Part-Timer!",s:2,g:["comedy","isekai"],note:"McDonald's demon"},
+{n:"Erased",s:1,g:["psych"],note:"Mystery thriller"},
+{n:"Your Lie in April",s:1,g:["romance","slice"],note:"Music drama"},
+{n:"Clannad",s:2,g:["romance","slice"],note:"After Story"},
+{n:"Toradora!",s:1,g:["romance","comedy"],note:"School romcom"},
+{n:"Horimiya",s:2,g:["romance","slice"],note:"Sweet school life"},
+{n:"Kaguya-sama: Love Is War",s:3,g:["romance","comedy"],note:"War of love"},
+{n:"My Dress-Up Darling",s:1,g:["romance","comedy","slice"],note:"Cosplay"},
+{n:"Fruits Basket",s:3,g:["romance","slice"],note:"The Final"},
+{n:"Oshi no Ko",s:2,g:["psych","romance"],note:"Idol industry"},
+{n:"The Fragrant Flower Blooms with Dignity",s:1,g:["romance","slice"],note:"New wave"},
+{n:"Komi Can’t Communicate",s:2,g:["comedy","slice"],note:"100 friends goal"},
+{n:"Mushishi",s:2,g:["slice","fantasy"],note:"Calm supernatural"},
+{n:"Barakamon",s:1,g:["slice"],note:"Healing island"},
+{n:"Nichijou",s:1,g:["comedy","slice"],note:"Absurd daily life"},
+{n:"Violet Evergarden",s:1,g:["romance","slice"],note:"Gorgeous"},
+{n:"Made in Abyss",s:2,g:["action","fantasy"],note:"Dark adventure"},
+{n:"Parasyte: The Maxim",s:1,g:["action","psych"],note:"Body horror"},
+{n:"Monster",s:1,g:["psych"],note:"Crime epic"},
+{n:"Dandadan",s:1,g:["action","comedy"],note:"Supernatural fun"},
+{n:"Kaiju No. 8",s:1,g:["action","fantasy"],note:"Monster corps"},
+{n:"Solo Leveling",s:2,g:["action","fantasy"],note:"Power climb"},
+{n:"Wind Breaker",s:1,g:["sports","action"],note:"Street crews"},
+{n:"The 100 Girlfriends Who Really Love You",s:1,g:["romance","comedy"],note:"Chaos harem"},
+{n:"Kaiju Girls",s:3,g:["comedy","slice"],note:"Shorts"}
+]
+const tbody=document.getElementById("tbody")
+const search=document.getElementById("search")
+const genreFilter=document.getElementById("genreFilter")
+const showWatchedBtn=document.getElementById("showWatched")
+const clearFiltersBtn=document.getElementById("clearFilters")
+const resetAll=document.getElementById("resetAll")
+const progressText=document.getElementById("progressText")
+const summaryBadge=document.getElementById("summaryBadge")
+let showWatchedOnly=false
+function keyFor(name,season){return "animechk::"+name+"::S"+season}
+function getChecked(name,season){return localStorage.getItem(keyFor(name,season))==="1"}
+function setChecked(name,season,val){if(val)localStorage.setItem(keyFor(name,season),"1");else localStorage.removeItem(keyFor(name,season))}
+function seasonCell(name,season,enabled){
+  if(!enabled)return `<span class="season-none">None</span>`
+  const id=(name+"__s"+season).replace(/\s+/g,"_")
+  const checked=getChecked(name,season)?"checked":""
+  return `<label class="season-cell"><input class="chk" type="checkbox" id="${id}" data-name="${name}" data-season="${season}" ${checked}><span>S${season}</span></label>`
+}
+function rowHTML(idx,item){
+  const s=[1,2,3,4,5,6,7,8].map(i=>seasonCell(item.n,i,i<=item.s))
+  return `<tr data-name="${item.n.toLowerCase()}" data-genres="${item.g.join(",")}" data-available="${item.s}">
+    <td>${idx}</td>
+    <td class="name">${item.n}<div class="note">${item.g.join(" • ")}</div></td>
+    <td>${s[0]}</td><td>${s[1]}</td><td>${s[2]}</td><td>${s[3]}</td>
+    <td class="opt-cols">${s[4]}</td><td class="opt-cols">${s[5]}</td><td class="opt-cols">${s[6]}</td><td class="opt-cols">${s[7]}</td>
+    <td class="note">${item.note||""}</td>
+  </tr>`
+}
+function render(){
+  const q=search.value.trim().toLowerCase()
+  const gf=genreFilter.value
+  tbody.innerHTML=data.map((d,i)=>rowHTML(i+1,d)).join("")
+  if(q||gf!=="all"||showWatchedOnly)applyFilters()
+  bindChecks()
+  updateProgress()
+  summaryBadge.textContent=data.length+" anime"
+}
+function applyFilters(){
+  const q=search.value.trim().toLowerCase()
+  const gf=genreFilter.value
+  const rows=[...tbody.querySelectorAll("tr")]
+  rows.forEach(r=>{
+    const name=r.dataset.name
+    const gs=r.dataset.genres.split(",")
+    let ok=true
+    if(q && !name.includes(q)) ok=false
+    if(gf!=="all" && !gs.includes(gf)) ok=false
+    if(showWatchedOnly){
+      const chks=[...r.querySelectorAll("input.chk")]
+      const watched=chks.some(c=>c.checked)
+      if(!watched) ok=false
+    }
+    r.style.display=ok?"table-row":"none"
+  })
+  updateProgress()
+}
+function bindChecks(){
+  document.querySelectorAll(".chk").forEach(ch=>{
+    ch.addEventListener("change",e=>{
+      const el=e.target
+      const name=el.dataset.name
+      const season=parseInt(el.dataset.season,10)
+      setChecked(name,season,el.checked)
+      updateProgress()
+    })
+  })
+}
+function updateProgress(){
+  const allChk=[...document.querySelectorAll(".chk")]
+  const visibleRows=[...tbody.querySelectorAll("tr")].filter(r=>r.style.display!== "none")
+  const visibleChk=visibleRows.flatMap(r=>[...r.querySelectorAll(".chk")])
+  const total=allChk.length
+  const watched=allChk.filter(c=>c.checked).length
+  const vtotal=visibleChk.length
+  const vwatched=visibleChk.filter(c=>c.checked).length
+  progressText.textContent=`${watched} of ${total} seasons watched${vtotal!==total?` • ${vwatched}/${vtotal} shown`:``}`
+}
+search.addEventListener("input",applyFilters)
+genreFilter.addEventListener("change",applyFilters)
+showWatchedBtn.addEventListener("click",()=>{showWatchedOnly=!showWatchedOnly;showWatchedBtn.textContent=showWatchedOnly?"Show all":"Show watched only";applyFilters()})
+clearFiltersBtn.addEventListener("click",()=>{search.value="";genreFilter.value="all";showWatchedOnly=false;showWatchedBtn.textContent="Show watched only";applyFilters()})
+resetAll.addEventListener("click",()=>{
+  if(!confirm("Clear all saved checks?")) return
+  data.forEach(d=>{for(let i=1;i<=8;i++)localStorage.removeItem(keyFor(d.n,i))})
+  render()
+})
+render()
+</script>
+</body>
+</html>

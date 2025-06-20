@@ -17,7 +17,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="butotn" Click="butotn_Click" Margin="0 0 10 0 " Grid.Column="0">Apply</Button>
-                <Button Grid.Column="1">Rest</Button>
+                <Button x:Name="reset_button" Click="reset_button_Click" Grid.Column="1">Rest</Button>
                 <Button Margin ="10 0 0 0 " Grid.Column="2">Refresh</Button>
 
             </Grid>
@@ -74,7 +74,7 @@
                 
                 <!--Column 1 for the application :-->
                 <StackPanel Grid.Column="0">
-                    <CheckBox Content="Weld"/>
+                    <CheckBox x:Name="content_checkbox" Content="Weld"/>
                     <CheckBox Content="Second Checkbox"/>
                 </StackPanel>
 
@@ -82,7 +82,7 @@
 
 
                 <StackPanel Grid.Column="1">
-                    <CheckBox Content="Second Grid"/>
+                    <CheckBox  Content="Second Grid"/>
                     <CheckBox Content="Third Box"/>
                     
                 </StackPanel>

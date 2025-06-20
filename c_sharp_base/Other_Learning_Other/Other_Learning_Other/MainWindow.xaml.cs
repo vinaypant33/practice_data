@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Learning_angel_six
+namespace Other_Learning_Other
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,19 +23,6 @@ namespace Learning_angel_six
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void butotn_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("I am the another button for the main application");
-            this.description_text.Text = "I am another text";
-        }
-
-        private void reset_button_Click(object sender, RoutedEventArgs e)
-        {
-            this.content_checkbox.IsChecked = false; 
-            //but if we wanna cehck the use  button
-
         }
     }
 }
