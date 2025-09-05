@@ -1,0 +1,54 @@
+﻿<Window x:Class="control_library.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:control_library"
+        xmlns:material_design  = "http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        
+        Title="MainWindow" Height="450" Width="800" WindowStyle="None" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition  Height="3*"/>
+            </Grid.RowDefinitions>
+            <Button Margin="10">
+                <Grid Width="100">
+                    <material_design:PackIcon Kind="ViewDashboard"/>
+                    <TextBlock Text="COntent Dashboard"></TextBlock>
+                </Grid>
+                
+            </Button>
+        </Grid>
+
+        <Grid x:Name ="grid_titlebar" Grid.ColumnSpan="2" Background="LightBlue" MouseDown="grid_titlebar_MouseDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" > 
+                <Button Width="25" Height="25" Background="{x:Null}" Margin="2" BorderBrush="{x:Null}">
+                    <material_design:PackIcon Kind="Bell" Foreground="White"/>
+                </Button>
+                <Button Width="25" Height="25" Background="{x:Null}" Margin="2" BorderBrush="{x:Null}">
+                    <material_design:PackIcon Kind="Account" Foreground="White"/>
+                </Button>
+                <Button x:Name ="min_button" Width="25" Height="25" Background="{x:Null}" Margin="2" BorderBrush="{x:Null}" Click="min_button_Click">
+                    <material_design:PackIcon Kind="Minimize" Foreground="White"/>
+                </Button>
+                <Button x:Name="off_button" Width="25" Height="25" Background="{x:Null}" Margin="2" BorderBrush="{x:Null}" Click="off_button_Click">
+                    <material_design:PackIcon Kind="Power" Foreground="White"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        
+    </Grid>
+</Window>

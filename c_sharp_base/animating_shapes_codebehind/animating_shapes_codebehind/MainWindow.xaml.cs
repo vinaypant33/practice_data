@@ -29,21 +29,27 @@ namespace animating_shapes_codebehind
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            //DoubleAnimation doubleanimation = new DoubleAnimation(0, 4, new Duration(TimeSpan.FromMilliseconds(1)));
-            DoubleAnimation doubleanimation = new DoubleAnimation();
-            //doubleanimation.From = 0;
-            //doubleanimation.To = 1;
-            //doubleanimation.Duration = TimeSpan.FromSeconds(2);
+            doubleanimation doubleanimation = new doubleanimation(0, 4, new duration(timespan.frommilliseconds(1)));
+            doubleanimation doubleanimation = new doubleanimation();
+            doubleanimation.from = 0;
+            doubleanimation.to = 1;
+            doubleanimation.duration = timespan.fromseconds(2);
 
 
             //doubleanimation doubleanimation = new doubleanimation();
-            doubleanimation.From = 0;
-            doubleanimation.To = 500;
-            doubleanimation.Duration = TimeSpan.FromSeconds(1);
+            doubleanimation.from = 0;
+            doubleanimation.to = 500;
+            doubleanimation.duration = timespan.fromseconds(1);
 
-            doubleanimation.EasingFunction = new QuadraticEase();
+            doubleanimation.easingfunction = new quadraticease();
 
-            rectangle1.BeginAnimation(WidthProperty , doubleanimation);
+            rectangle1.beginanimation(widthproperty, doubleanimation);
+
+
+            
+
+            
+
         }
     }
 }
