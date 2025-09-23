@@ -1,12 +1,201 @@
-﻿<Window x:Class="darg_drop.MainWindow"
+﻿<Window x:Class="IrelandCarsFab.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:darg_drop"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Exploring Trends in - Ireland's Cars"
+        Width="1100" Height="700"
+        WindowStartupLocation="CenterScreen"
+        Background="#0a0f1a">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#0a3d62">
+            <TextBlock Text="Exploring Trends in - Ireland's Cars"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
+                 Foreground="#eaf3ff"
+                 FontWeight="SemiBold"
+                 FontSize="18"/>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid Background="#0f172a" Margin="20"  SnapsToDevicePixels="True">
+                <Border CornerRadius="16" BorderBrush="#20304d" BorderThickness="1"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Margin="24,20,24,0">
+                        <TextBlock Text="Floating Action Menu Demo" FontSize="20" Foreground="#e8eef7" Margin="0,0,0,6"/>
+                        <TextBlock Text="Use the circular button at the bottom-right to open quick actions for Dashboard, EDA, and ML Model." 
+                       Foreground="#c9d5ea" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <Frame x:Name="MainFrame" Grid.Row="1" Margin="24" NavigationUIVisibility="Hidden" />
+                </Grid>
+            </Grid>
+
+            <Grid>
+                <Grid.Resources>
+                    <Style x:Key="CircleButton" TargetType="Button">
+                        <Setter Property="Width" Value="56"/>
+                        <Setter Property="Height" Value="56"/>
+                        <Setter Property="Background" Value="#000000"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="28" 
+                          SnapsToDevicePixels="True" 
+                          Effect="{DynamicResource Shadow}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                    <DropShadowEffect x:Key="Shadow" Color="#18429A" Direction="270" ShadowDepth="0" BlurRadius="20" Opacity="0.82"/>
+
+                    <Style x:Key="FabButton" TargetType="ToggleButton">
+                        <Setter Property="Width" Value="64"/>
+                        <Setter Property="Height" Value="64"/>
+                        <Setter Property="Background" Value="#126ee2"/>
+                        <Setter Property="BorderBrush" Value="#0c50a7"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Grid>
+                                        <Ellipse Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Width="8" Height="8" Fill="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="0">
+                                                <Ellipse.Triggers>
+                                                    <EventTrigger RoutedEvent="Loaded">
+                                                        <BeginStoryboard>
+                                                            <Storyboard RepeatBehavior="Forever">
+                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.25" Duration="0:0:1.5" AutoReverse="True"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </Ellipse.Triggers>
+                                            </Ellipse>
+                                            <Ellipse Width="8" Height="8" Fill="White" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
+                                                <Ellipse.Triggers>
+                                                    <EventTrigger RoutedEvent="Loaded">
+                                                        <BeginStoryboard>
+                                                            <Storyboard RepeatBehavior="Forever">
+                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.25" Duration="0:0:1.5" AutoReverse="True" BeginTime="0:0:0.4"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </Ellipse.Triggers>
+                                            </Ellipse>
+                                            <Ellipse Width="8" Height="8" Fill="White" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2">
+                                                <Ellipse.Triggers>
+                                                    <EventTrigger RoutedEvent="Loaded">
+                                                        <BeginStoryboard>
+                                                            <Storyboard RepeatBehavior="Forever">
+                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.25" Duration="0:0:1.5" AutoReverse="True" BeginTime="0:0:0.8"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </Ellipse.Triggers>
+                                            </Ellipse>
+                                        </Grid>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#2c87e8"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,24,24">
+                    <Grid x:Name="FabArea" Width="240" Height="240" RenderTransformOrigin="1,1">
+                        <Grid.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </Grid.RenderTransform>
+
+                        <Button x:Name="BtnDashboard" Style="{StaticResource CircleButton}" Content="Dashboard" Opacity="0" 
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8">
+                            <Button.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Button.RenderTransform>
+                        </Button>
+
+                        <Button x:Name="BtnEda" Style="{StaticResource CircleButton}" Content="EDA" Opacity="0"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8">
+                            <Button.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Button.RenderTransform>
+                        </Button>
+
+                        <Button x:Name="BtnMl" Style="{StaticResource CircleButton}" Content="ML" Opacity="0"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8">
+                            <Button.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Button.RenderTransform>
+                        </Button>
+
+                        <ToggleButton x:Name="Fab" Style="{StaticResource FabButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0"/>
+
+                        <Grid.Triggers>
+                            <EventTrigger SourceName="Fab" RoutedEvent="ToggleButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BtnDashboard" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.18"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnEda" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.18" BeginTime="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnMl" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.18" BeginTime="0:0:0.10"/>
+
+                                        <DoubleAnimation Storyboard.TargetName="BtnDashboard" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="-16" Duration="0:0:0.22"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnDashboard" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="-140" Duration="0:0:0.22"/>
+
+                                        <DoubleAnimation Storyboard.TargetName="BtnEda" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="-100" Duration="0:0:0.22" BeginTime="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnEda" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="-100" Duration="0:0:0.22" BeginTime="0:0:0.05"/>
+
+                                        <DoubleAnimation Storyboard.TargetName="BtnMl" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="-140" Duration="0:0:0.22" BeginTime="0:0:0.10"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnMl" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="-16" Duration="0:0:0.22" BeginTime="0:0:0.10"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger SourceName="Fab" RoutedEvent="ToggleButton.Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BtnDashboard" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.18"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnEda" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.18" BeginTime="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnMl" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.18" BeginTime="0:0:0.10"/>
+
+                                        <DoubleAnimation Storyboard.TargetName="BtnDashboard" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="0:0:0.22"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnDashboard" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="0" Duration="0:0:0.22"/>
+
+                                        <DoubleAnimation Storyboard.TargetName="BtnEda" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="0:0:0.22" BeginTime="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnEda" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="0" Duration="0:0:0.22" BeginTime="0:0:0.05"/>
+
+                                        <DoubleAnimation Storyboard.TargetName="BtnMl" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="0:0:0.22" BeginTime="0:0:0.10"/>
+                                        <DoubleAnimation Storyboard.TargetName="BtnMl" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="0" Duration="0:0:0.22" BeginTime="0:0:0.10"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Grid.Triggers>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
