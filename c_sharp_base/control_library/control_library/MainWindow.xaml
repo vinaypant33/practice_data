@@ -27,7 +27,7 @@
             <Button Margin="10">
                 <Grid Width="100">
                     <material_design:PackIcon Kind="ViewDashboard"/>
-                    <TextBlock Text="COntent Dashboard"></TextBlock>
+                    <TextBlock HorizontalAlignment  ="Right" Text="COntent Dashboard"></TextBlock>
                 </Grid>
                 
             </Button>
