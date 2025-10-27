@@ -1,0 +1,103 @@
+﻿<Window x:Class="Learning_angel_six.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Learning_angel_six"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="400">
+    <Border Padding="10">
+        <StackPanel>
+            <!--This is the main container-->
+            <Grid>
+                <!--The content for the buttons controlled by the grid--> 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="butotn" Click="butotn_Click" Margin="0 0 10 0 " Grid.Column="0">Apply</Button>
+                <Button Grid.Column="1">Rest</Button>
+                <Button Margin ="10 0 0 0 " Grid.Column="2">Refresh</Button>
+
+            </Grid>
+            
+            <!--Here the rest of the elements would be done-->
+
+            <TextBlock Text="Pulse Properties" Margin="0  10 , 0 0 " FontWeight="Bold" FontSize="15"/>
+            <TextBlock Text="Description" Margin=" 0 0 0 0" />
+            <!--Textbox for the entry field and that can be used for the main application-->
+
+            <TextBox x:Name="description_text" Padding="5"></TextBox>
+               
+            <!--Now for the two elements we gonna use the two textboxes for the main element--> 
+            
+            <!--Grid to be used for the buttons and that would be used for the status and Revision-->
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Description"/>
+                    <TextBox Padding="2" IsReadOnly="True" Background="#eee"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin=" 3 0 0 0">
+                    <TextBlock Text="Revision"/>
+                    <TextBox Padding="2" Margin="3 0 0 0 " IsReadOnly="True" Background="#eee"/>
+                </StackPanel>
+            </Grid>
+            
+            <!--This is the second ddescription and that would be the Part NUmber and that is readonly as well-->
+               
+            <!--Part Number--> 
+            <TextBlock Text="Part Number" Margin=" 0 0 0 0"/>
+
+            <TextBox IsReadOnly =" true" Background="#eee" Padding="5"></TextBox>
+               
+            <!--# Same for the Material and Other Thing same as above--> 
+            
+            
+            <!--Namufacturing Information and other things-->  
+            
+            <!--For this we need to have some checkboxes in two columns-->
+
+            <Grid Margin="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    
+                </Grid.ColumnDefinitions>
+                
+                <!--Column 1 for the application :-->
+                <StackPanel Grid.Column="0">
+                    <CheckBox Content="Weld"/>
+                    <CheckBox Content="Second Checkbox"/>
+                </StackPanel>
+
+                <!--Second checkbox for the application in the second column-->
+
+
+                <StackPanel Grid.Column="1">
+                    <CheckBox Content="Second Grid"/>
+                    <CheckBox Content="Third Box"/>
+                    
+                </StackPanel>
+            </Grid>
+        
+            <!--The combobox for the other materials that we can choose from the options-->
+
+            <ComboBox SelectedIndex = "0" Padding="2" Margin="4">
+                <ComboBoxItem>Painted</ComboBoxItem>
+                <ComboBoxItem>Rather Item</ComboBoxItem>
+            </ComboBox>
+            
+            
+        </StackPanel>
+        
+        
+    </Border>
+</Window>
