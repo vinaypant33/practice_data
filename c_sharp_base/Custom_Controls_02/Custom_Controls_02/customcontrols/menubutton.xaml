@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Custom_Controls_02.customcontrols.menubutton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Custom_Controls_02.customcontrols"
+             mc:Ignorable="d" 
+              x:Name="this" Background="White">
+
+    <UserControl.Resources>
+        
+        
+        
+        
+        <!--Setting defualt ICon if we did not bind any icon in hte main window-->
+        <PathGeometry x:Key="DefaultIcon" Figures="M4,2 L44,2 L44,44 L4,44 Z"/>
+        
+        <!--Defining the style for the textblock herer-->
+
+        <Style x:Key="MenuTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            
+            <!--To change the Foreground on mourover and meu item seleciton-->
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding IsMouseOver , RelativeSource=
+                   {RelativeSource Mode=FindAncestor , AncestorType=ToggleButton}}" Value="True">
+                    <Setter Property="Foreground" Value="#515EC1" ></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type ToggleButton}">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Background="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <!--Columns for icons--> 
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    
+                                </Grid.ColumnDefinitions>
+                                
+                                
+                                
+                                <Path Data="{Binding Icon ,ElementName=this , FallbackValue=DefaultIcon,
+                                    TargetNullValue=DefaultIcon}" HorizontalAlignment="Center" Stretch="Uniform"
+                                      Height="17" Width="18" Fill="#515EC1"/>
+
+                                <TextBlock Text="{Binding Text ,ElementName=this , FallbackValue=MenuText,TargetNullValue=MenuText}"
+                                    />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--Trigger to set our toggle button as cehcked on mainwindow startup-->
+                            <DataTrigger Binding="{Binding IsSelected , ElementName=this}" Value="True"></DataTrigger>
+                            
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <ToggleButton/>
+</UserControl>
